@@ -1,1 +1,1 @@
-# projet_plaquette
+# projet_plaquette G6
