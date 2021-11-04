@@ -1,0 +1,26 @@
+{
+  "name": "projet_plaquette",
+  "version": "1.0.0",
+  "description": "Application web monopage",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "hussem badri",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "ejs": "^2.6.1",
+    "express": "^4.16.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cnini/projet_plaquette.git"
+  },
+  "keywords": [],
+  "bugs": {
+      "url": "https://github.com/cnini/projet_plaquette/issues"
+  },
+  "homepage": "https://github.com/cnini/projet_plaquette"
+}
+
