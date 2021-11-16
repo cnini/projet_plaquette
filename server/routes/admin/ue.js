@@ -70,4 +70,16 @@ adminRoutes.route('/admin/ue/update/:id').post( (req,res) => {
     
 })
 
+// Supprimer une UE
+adminRoutes.route('/admin/ue/delete/:id').delete( (req,res) => {
+    let db_cnx = dbo.getDb()
+    let currentUe = { _id: ObjectId(req.params.id) }
+
+    db_cnx.collection('ue').deleteOne(currentUe, (err,response) => {
+        if (err) throw err
+        console.log('1 document deleted')
+        res.json(response)
+    })
+})
+
 module.exports = adminRoutes

@@ -58,12 +58,24 @@ adminRoutes.route('/admin/theme/update/:id').post( (req,res) => {
         }
     }
 
-    db_cnx.collection('ue').updateOne(currentTheme,updatedTheme, (err,response) => {
+    db_cnx.collection('theme').updateOne(currentTheme,updatedTheme, (err,response) => {
         if (err) throw err
         console.log('1 document updated')
         res.json(response)
     })
     
+})
+
+// Supprimer un thème
+adminRoutes.route('/admin/theme/delete/:id').delete( (req,res) => {
+    let db_cnx = dbo.getDb()
+    let currentTheme = { _id: ObjectId(req.params.id) }
+
+    db_cnx.collection('theme').deleteOne(currentTheme, (err,response) => {
+        if (err) throw err
+        console.log('1 document deleted')
+        res.json(response)
+    })
 })
 
 module.exports = adminRoutes

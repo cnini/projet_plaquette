@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 
 const Ue = (props) => (
     <tr>
@@ -8,7 +8,10 @@ const Ue = (props) => (
         <td>{props.ue.ue_categorie}</td>
         <td>{props.ue.class_id}</td>
         <td>
-            <Link to={'/admin/ue/update/' + props.ue._id}>Modifier</Link>
+            <ul>
+                <li><a href={'/admin/ue/update/'+ props.ue._id}>Modifier</a></li>
+                <li><a href="/admin/ue" onClick={() => props.deleteUe(props.ue._id)}>Supprimer</a></li>
+            </ul>
         </td>
     </tr>
 )
@@ -16,6 +19,8 @@ const Ue = (props) => (
 export default class UeList extends Component {
     constructor(props) {
         super(props)
+
+        this.deleteUe = this.deleteUe.bind(this)
 
         this.state = { ues: [] }
     }
@@ -29,12 +34,23 @@ export default class UeList extends Component {
             .catch( (error) => console.log(error) )
     }
 
+    deleteUe(id) {
+        axios
+            .delete('http://localhost:8080/admin/ue/delete/' + id)
+            .then( (response) => console.log(response.data) )
+
+        this.setState({
+            ues: this.state.ues.filter((ue) => ue._id !== id)
+        })
+    }
+
     ueList() {
         return this.state.ues.map( (ue) => {
             console.log(ue)
             return(
                 <Ue
                     ue={ue}
+                    deleteUe={this.deleteUe}
                     key={ue._id}
                 />
             )

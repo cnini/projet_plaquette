@@ -68,12 +68,24 @@ adminRoutes.route('/admin/cours/update/:id').post( (req,res) => {
         }
     }
 
-    db_cnx.collection('ue').updateOne(currentCours,updatedCours, (err,response) => {
+    db_cnx.collection('cours').updateOne(currentCours,updatedCours, (err,response) => {
         if (err) throw err
         console.log('1 document updated')
         res.json(response)
     })
     
+})
+
+// Supprimer un cours
+adminRoutes.route('/admin/cours/delete/:id').delete( (req,res) => {
+    let db_cnx = dbo.getDb()
+    let currentCours = { _id: ObjectId(req.params.id) }
+
+    db_cnx.collection('cours').deleteOne(currentCours, (err,response) => {
+        if (err) throw err
+        console.log('1 document deleted')
+        res.json(response)
+    })
 })
 
 module.exports = adminRoutes

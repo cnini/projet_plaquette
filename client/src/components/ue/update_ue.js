@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import { withRouter } from 'react-router'
 
-class UpdateUe extends Component {
+export default class UpdateUe extends Component {
     constructor(props) {
         super(props)
 
@@ -173,5 +172,3 @@ class UpdateUe extends Component {
         )
     }
 }
-
-export default withRouter(UpdateUe)
