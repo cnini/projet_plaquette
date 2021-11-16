@@ -1,13 +1,17 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 
-const Ue = (props) => {
+const Ue = (props) => (
     <tr>
         <td>{props.ue.ue_code}</td>
         <td>{props.ue.ue_categorie}</td>
         <td>{props.ue.class_id}</td>
+        <td>
+            <Link to={'/admin/ue/update/' + props.ue._id}>Modifier</Link>
+        </td>
     </tr>
-}
+)
 
 export default class UeList extends Component {
     constructor(props) {
@@ -18,15 +22,16 @@ export default class UeList extends Component {
 
     componentDidMount() {
         axios
-            .get('http://localhost:8080/admin/ue/')
+            .get('http://localhost:8080/admin/ue')
             .then( (response) => {
-                this.setState({ ues: response.data })
+                this.setState({ues:response.data})
             })
             .catch( (error) => console.log(error) )
     }
 
     ueList() {
         return this.state.ues.map( (ue) => {
+            console.log(ue)
             return(
                 <Ue
                     ue={ue}
@@ -37,7 +42,7 @@ export default class UeList extends Component {
     }
 
     render() {
-        return(
+        return (
             <div>
                 <h3>Liste des UE</h3>
                 <table>
@@ -45,7 +50,8 @@ export default class UeList extends Component {
                         <tr>
                             <th>Code</th>
                             <th>Catégorie</th>
-                            <th>Année ÉSTIAM</th>
+                            <th>Année</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>{this.ueList()}</tbody>
