@@ -11,7 +11,8 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "ejs": "^2.6.1",
-    "express": "^4.16.3"
+    "express": "^4.16.3",
+    "mongodb": "^4.2.0"
   },
   "repository": {
     "type": "git",
@@ -19,8 +20,7 @@
   },
   "keywords": [],
   "bugs": {
-      "url": "https://github.com/cnini/projet_plaquette/issues"
+    "url": "https://github.com/cnini/projet_plaquette/issues"
   },
   "homepage": "https://github.com/cnini/projet_plaquette"
 }
-

@@ -3,8 +3,12 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 
+
 var tasks = [];
 var completed = [];
+var status = "";
+
+// # Initialise users and usertypes
 
 //calling express
 var app = express();
@@ -17,13 +21,25 @@ app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.get("/", function(req, res){
-	res.render('index', {tasks: tasks , completed: completed});
+	res.render('index', {status: status});
 });
 
 app.get("/crud", function(req, res){
-	res.render('crud');
+	res.render('crud', {tasks: tasks , completed: completed});
 });
 
+app.get("/login", function(req, res){
+	res.render('login');
+});
+
+
+app.post("/add_admin", function(req, res){
+	var controllers = require('./connectDB');
+	controllers.init_admin();
+	if (req) throw req;
+	status = "Opération terminé";
+	res.redirect('/');
+});
 app.post('/addtask', function(req, res){
 	if(req.body.newtask){
 		tasks.push(req.body.newtask);

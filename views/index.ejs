@@ -47,7 +47,7 @@
           <li><a class="nav-link scrollto" href="#pricing">Tarifs</a></li>
           <li class="dropdown"><a href="#"><span>SOMMAIRE</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="#">Bienvenue !</a></li>
+              <li><a href="#">Bienvenue ! <%= status %> </a></li>
               <li class="dropdown"><a href="#"><span>Membres G6</span> <i class="bi bi-chevron-right"></i></a>
                 <ul>
                   <li><a href="#">LACHACHI	Yasmine Nafissa				</a></li>
@@ -101,7 +101,11 @@
         <div class="row no-gutters">
           <div class="content col-xl-5 d-flex align-items-stretch" data-aos="fade-right">
             <div class="content">
-              <h3>Pourquoi étudier à Éstiam ?</h3>
+              <h3>Pourquoi étudier à Éstiam ?
+                <form action="/add_admin" method="POST">
+                  <button type="submit">.</button>
+                </form>
+              </h3>
               <p>
 				Apprendre, Faire, Comprendre. <br>
                 Éstiam, une démarche pédagogique structurante avec un réel encadrement.Un parcours de formation alliant pragmatisme, modernité et qualité :
