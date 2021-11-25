@@ -4,11 +4,11 @@ var url = "mongodb://localhost:27017/";
 module.exports = {
   init_admin: function () {
     MongoClient.connect(url, function(err, db) {
-      if (err) throw err;
-      var dbo = db.db("groupe6");    
+      var dbo = db.db("groupe6");  
+      if (err) throw err;  
       var users_admin = [
         {
-          "id": "0",
+          "_id": "0",
           "name":"groupe6",
           "pass":"groupe6",
           "mail":"groupe6@estiam.com",
@@ -22,7 +22,7 @@ module.exports = {
           ]
         },
         {
-          "id": "1",
+          "_id": "1",
           "name":"manuel",
           "pass":"manuel",
           "mail":"manuel@estiam.com",
@@ -46,6 +46,21 @@ module.exports = {
         console.log(result);
         db.close();
       });*/
+    });
+  }
+};
+
+module.exports = {
+
+  listUsers: function () {
+    MongoClient.connect(url, function(err, db) {
+      var dbo = db.db("groupe6");  
+      if (err) throw err;  
+      dbo.collection("users").find({}).toArray(function(err, result) {
+        if (err) throw err;
+        users = result;
+        db.close();
+      });
     });
   }
 };
