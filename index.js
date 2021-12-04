@@ -4,8 +4,6 @@ var MongoClient = require('mongodb').MongoClient;
 const ObjectID = require('mongodb').ObjectID;
 var url = "mongodb://localhost:27017/";
 
-var tasks = [];
-var completed = [];
 var status = "";
 
 var users = [];
@@ -15,6 +13,7 @@ var certificates = [];
 var partners = [];
 var partners_campus = [];
 var programmes = [];
+var finances = [];
 // # Initialise users and usertypes
 
 MongoClient.connect(url, function(err, db) {
@@ -70,6 +69,17 @@ MongoClient.connect(url, function(err, db) {
         db.close();
     });
 });
+
+MongoClient.connect(url, function(err, db) {
+    if (err) throw err;
+    var dbo = db.db("groupe6");
+    dbo.collection("finances").find({}).toArray(function(err, results) {
+        if (err) throw err;
+        finances = results;
+        db.close();
+    });
+});
+
 //calling express
 var app = express();
 
@@ -84,15 +94,9 @@ app.get("/", function(req, res) {
     res.render('index', { status: status });
 });
 
-app.get("/crud", function(req, res) {
-    res.render('crud', { tasks: tasks, completed: completed });
-});
-
 app.get("/login", function(req, res) {
     res.render('login');
 });
-
-
 
 app.post("/login", function(req, res) {
     if (auth.length == 1) {
@@ -111,12 +115,12 @@ app.post("/login", function(req, res) {
                     console.log(result);
                     auth = result;
                     db.close();
+                    if (result.length > 0) {
+                        res.redirect('/dashboard');
+                    } else {
+                        res.redirect('/login?status=false');
+                    }
                 });
-                if (auth.length == 1) {
-                    res.redirect('/dashboard');
-                } else {
-                    res.redirect('/login?status=false');
-                }
             });
         }
     }
@@ -210,7 +214,8 @@ app.get("/dashboard", function(req, res) {
             certificates: certificates,
             partners: partners,
             partners_campus: partners_campus,
-            programmes: programmes
+            programmes: programmes,
+            finances: finances
         });
     } else {
         res.redirect('/login?status=need')
@@ -402,10 +407,62 @@ app.post("/programmes/delete/:id", function(req, res) {
 });
 
 
-app.post('/addtask', function(req, res) {
-    if (req.body.newtask) {
-        tasks.push(req.body.newtask);
-        res.redirect('/');
+app.post("/finance/add", function(req, res) {
+    if (req.body) {
+        var finance = [{
+            "title": req.body.title,
+            "description": req.body.description,
+            "total": req.body.total,
+            "acompte": req.body.acompte,
+            "mobilite": req.body.mobilite
+        }];
+        MongoClient.connect(url, function(err, db) {
+            if (err) throw err;
+            var dbo = db.db("groupe6");
+            dbo.collection("finances").insertMany(finance, function(err, res) {
+                if (err) throw err;
+                console.log(res);
+                db.close();
+            });
+            res.redirect('/dashboard');
+        });
+    }
+});
+
+app.post("/finance/edit/:id", function(req, res) {
+    if (req.body) {
+        MongoClient.connect(url, function(err, db) {
+            if (err) throw err;
+            var dbo = db.db("groupe6");
+            dbo.collection("finances").updateOne({ _id: new ObjectID(req.params.id) }, { $set: { 'title': req.body.title, 'description': req.body.description, 'total': req.body.total, 'acompte': req.body.acompte, 'mobilite': req.body.mobilite } }, { upsert: true }, function(err, res) {
+                if (err) throw err;
+                console.log("1 document update");
+                console.log(res);
+                db.close();
+            });
+            res.redirect('/dashboard?status=done&m=finance update');
+        });
+    }
+});
+
+
+app.post("/finance/delete/:id", function(req, res) {
+    if (req.body) {
+        MongoClient.connect(url, function(err, db) {
+            if (err) throw err;
+            var dbo = db.db("groupe6");
+
+            var myquery = { _id: req.params.id };
+            dbo.collection("finances").deleteMany(myquery, function(err, obj) {
+                if (err) throw err;
+                console.log("1 document deleted", obj);
+                db.close();
+            });
+
+            console.log(myquery);
+
+            res.redirect('/dashboard?status=done&m=finance Delete');
+        });
     }
 });
 
@@ -413,12 +470,6 @@ app.get('/adduser', function(req, res) {
     var tools = require('./connectDB.js');
     tools.init_admin();
     res.redirect('/dashboard');
-});
-
-app.post('/removetask', function(req, res) {
-    completed.push(req.body.check);
-    tasks.pop(req.body.check);
-    res.redirect('/');
 });
 
 app.listen(4455, function() {

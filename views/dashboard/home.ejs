@@ -1364,6 +1364,150 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row" id="finances">
+                        <div class="col-md-6">
+                            <div class="card full-height">
+                                <div class="card-header">
+                                    <div class="card-title">Gestion du contenu des finances</div>
+                                </div>
+                                <div class="card-body">
+                                    <ol class="activity-feed">
+
+                                        <form action="/finance/add" method="post">
+
+                                            <li class="feed-item feed-item-secondary">
+                                                <span class="text">
+                                                
+                                        <input class="form-control control form " type="text" name="title" id="title" placeholder="Financement">
+                                            </span>
+                                            </li>
+                                            <li class="feed-item feed-item-success">
+                                                <span class="text">
+                                                <input class="form-control control form " type="text" name="description" id="description" placeholder="Description du financement">
+                                            </span>
+                                            </li>
+                                            <li class="feed-item feed-item-info">
+                                                <span class="text">
+                                                <input class="form-control control form " type="number" name="total" id="total" placeholder="Total du financement">
+                                            </span>
+                                            </li>
+                                            <li class="feed-item feed-item-warning">
+                                                <span class="text">
+                                                <input class="form-control control form " type="number" name="acompte" id="acompte" placeholder="acompte  du Financement">
+                                            </span>
+                                            </li>
+                                            <li class="feed-item feed-item-warning">
+                                                <span class="text">
+                                                <input class="form-control control form " type="number" name="mobilite" id="mobilite" placeholder="Mobilité à  L’INTERNATIONAL">
+                                            </span>
+                                            </li>
+                                            <button type="submit" class="btn btn-success btn-block" [disabled]="!form.form.valid">
+                                            Save
+                                        </button>
+                                        </form>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card full-height">
+                                <div class="card-header">
+                                    <div class="card-head-row">
+                                        <div class="card-title">Listes des Financements
+                                            <%= finances.length %>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <% for( var i = 0; i < finances.length; i++){ %>
+                                        <div class="d-flex">
+                                            <div class="avatar avatar-online">
+                                                <span class="avatar-title rounded-circle border border-white bg-info"><%= i %></span>
+                                            </div>
+                                            <div class="flex-1 ml-3 pt-1">
+                                                <h6 class="text-uppercase fw-bold mb-1">
+                                                    <%= finances[i]["title"] %><span class="text-warning pl-3"><%= finances[i]["total"] %> £</span></h6>
+                                                <span class="text-muted"><%= finances[i]["description"] %></span>
+                                                <br>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="row">
+                                            <br>
+                                            <div class="col-md-8">
+                                                <!-- Button trigger modal -->
+                                                <small>
+												<button type="button" class="btn btn btn-primary btn-block btn-toggle" data-toggle="modal" data-target="#exampleModal<%= finances[i]['_id'] %>">
+													<small>Edit</small>
+                                                </button>
+                                                </small>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <!-- Button trigger modal -->
+                                                <small>
+												<form action="/finance/delete/<%= finances[i]['_id'] %>" method="POST">
+													<button type="submit" class="btn btn-danger btn-toggle btn-block " >
+														<small>Delete</small>
+                                                </button>
+                                                </form>
+                                                </small>
+                                            </div>
+                                        </div>
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="exampleModal<%= finances[i]['_id'] %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        Edit certifications
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+                                                    </div>
+                                                    <form action="/finance/edit/<%= finances[i]['_id'] %>" class="form-control control-form form " method="post">
+                                                        <div class="modal-body">
+                                                            <input type="hidden" name="_id" value="<%= finances[i]['_id'] %>">
+                                                            <li class="feed-item feed-item-secondary">
+                                                                <span class="text">
+																	Financement																
+														<input class="form-control control form "  value="<%= finances[i]['title'] %>" type="text" name="title" id="title" placeholder="">
+															</span>
+                                                            </li>
+                                                            <li class="feed-item feed-item-success">
+                                                                <span class="text">Description du financement
+																<input class="form-control control form " value="<%= finances[i]['description'] %>" type="text" name="description" id="description" placeholder="">
+															</span>
+                                                            </li>
+                                                            <li class="feed-item feed-item-info">
+                                                                <span class="text">TOTAL
+																<input class="form-control control form " value="<%= finances[i]['total'] %>" type="number" name="total" id="provider" placeholder="">
+															</span>
+                                                            </li>
+                                                            <li class="feed-item feed-item-warning">
+                                                                <span class="text">Acompte
+																<input class="form-control control form " value="<%= finances[i]['acompte'] %>" type="number" name="acompte" id="classe" placeholder="">
+															</span>
+                                                            </li>
+                                                            <li class="feed-item feed-item-warning">
+                                                                <span class="text">Mobilité
+																<input class="form-control control form " value="<%= finances[i]['mobilite'] %>" type="number" name="mobilite" id="classe" placeholder="">
+															</span>
+                                                            </li>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="reset" class="btn btn-danger" data-dismiss="modal">Cancer</button>
+                                                            <button type="submit" class="btn btn-success">Save changes</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <% } %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <footer class="footer">
