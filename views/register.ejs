@@ -23,25 +23,40 @@
                 <h1>ESTIAM </h1>
                 <section class=" bg-image">
                     <div class="login-form">
-                        <form action="/login" method="post">
-                            <h2 class="text-center">Log in</h2> <br>
-                            <div class="form-group">
-                                <input name="mail" type="text" class="form-control" placeholder="Email" required="required">
+                        <form action="/register" class="form-control control-form form " method="post">
+                            <div class="modal-body">
+                                <input type="hidden" name="_token" value="">
+                                <li class="feed-item feed-item-secondary">
+                                    <span class="text">
+                                    Nom
+                                    
+                            <input class="form-control control form "  value="" type="text" name="name" id="name" placeholder="">
+                                </span>
+                                </li>
+                                <li class="feed-item feed-item-success">
+                                    <span class="text">Email
+                                    <input class="form-control control form " value="" type="text" name="mail" id="mail" placeholder="">
+                                    <br>
+                                    <input type="password" name="pass" id="pass" class="form control input-form input" required>
+                                </span>
+                                </li>
+                                <li class="feed-item feed-item-info">
+                                    <span class="text">Tel
+                                    <input class="form-control control form " value="" type="text" name="tel" id="tel" placeholder="">
+                                </span>
+                                </li>
+                                <li class="feed-item feed-item-warning">
+                                    <span class="text">Adresse
+                                    <input class="form-control control form " value="" type="text" name="address" id="address" placeholder="">
+                                </span>
+                                </li>
                             </div>
-                            <br>
-                            <div class="form-group">
-                                <input name="pass" type="password" class="form-control" placeholder="Password" required="required">
-                            </div>
-                            <br>
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-primary btn-block">Log in</button>
-                            </div>
-                            <div class="clearfix">
-                                <label class="float-left form-check-label"><input type="checkbox"> Remember me</label>
-                                <a href="#" class="float-right">Forgot Password?</a>
+                            <div class="modal-footer">
+                                <button type="reset" class="btn btn-danger" data-dismiss="modal">Cancer</button>
+                                <button type="submit" class="btn btn-success">Save changes</button>
                             </div>
                         </form>
-                        <p class="text-center"><a href="/register">Create an Account</a></p>
+                        <p class="text-center"><a href="/login">Login</a></p>
                     </div>
                 </section>
             </div>
@@ -134,100 +149,6 @@
         <!-- Template Main JS File -->
         <script src="/main.js"></script>
 
-        <script>
-            function false_user() {
-                swal("Erreur de connexion Ressayer!", "Created your own account!", {
-                    icon: "error",
-                    buttons: {
-                        confirm: {
-                            className: 'btn btn-danger'
-                        }
-                    },
-                }).catch(swal.noop);
-            }
-
-            function logout() {
-                swal("Déconnexion !", "Come back ?", {
-                    icon: "success",
-                    buttons: {
-                        confirm: {
-                            className: 'btn btn-danger'
-                        }
-                    },
-                }).catch(swal.noop);
-            }
-
-            function need() {
-                swal("Veuillez vous connectez !", " Ou Created your own account!", {
-                    icon: "error",
-                    buttons: {
-                        confirm: {
-                            className: 'btn btn-danger'
-                        }
-                    },
-                }).catch(swal.noop);
-            }
-
-            function register() {
-                swal("Vous êtes à présent enregistrer !", " Veuillez vous connectez !", {
-                    icon: "success",
-                    buttons: {
-                        confirm: {
-                            className: 'btn btn-danger'
-                        }
-                    },
-                }).catch(swal.noop);
-            }
-
-            function done() {
-                swal({
-                    title: 'Vous etes deja online',
-                    text: "Allez au dashboard !",
-                    type: 'success',
-                    buttons: {
-                        confirm: {
-                            text: 'Yes, it!',
-                            className: 'btn btn-success'
-                        },
-                        cancel: {
-                            visible: true,
-                            className: 'btn btn-danger'
-                        }
-                    }
-                }).then((Delete) => {
-                    if (Delete) {
-                        setTimeout(window.location.href = "/dashboard", 151000);
-                    } else {
-                        swal.close();
-                    }
-                });
-            }
-        </script>
-
-
-        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
-        <script>
-            var url_string = window.location.href; //window.location.href
-            var url = new URL(url_string);
-            var c = url.searchParams.get("status");
-            console.log(c);
-            if (c === "false") {
-                setTimeout(false_user(), 5000);
-            }
-            if (c === "need") {
-                setTimeout(need(), 5000);
-            }
-            if (c === "done") {
-                setTimeout(done(), 5000);
-            }
-            if (c === "logout") {
-                setTimeout(logout(), 5000);
-            }
-            if (c === "register") {
-                setTimeout(register(), 5000);
-            }
-        </script>
 
 </body>
 

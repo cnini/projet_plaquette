@@ -292,7 +292,7 @@
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="#">Account Setting</a>
                                         <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#">Logout</a>
+                                        <a class="dropdown-item" href="/logout">Logout</a>
                                     </li>
                                 </div>
                             </ul>
@@ -425,6 +425,22 @@
                                 </ul>
                             </div>
                         </li>
+                        <li class="nav-item">
+                            <a data-toggle="collapse" href="#programmes">
+                                <i class="fas fa-layer-group"></i>
+                                <p>Programmes par thême</p>
+                                <span class="caret"></span>
+                            </a>
+                            <div class="collapse" id="programmes">
+                                <ul class="nav nav-collapse">
+                                    <li>
+                                        <a href="#programme">
+                                            <span class="sub-item">Programmes par thême</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
 
                         <li class="mx-4 mt-2">
                             <a href="/dashboard" class="btn btn-primary btn-block"><span class="btn-label mr-2"> <i class="fa fa-heart"></i> </span>Reload Data</a>
@@ -501,11 +517,66 @@
                         </div>
                     </div>
                     <div class="row" id="users">
-                        <div class="card">
+                        <div class="col-md-12 card">
                             <div class="card-header">
-                                <div class="col-md-12">
-                                    <div class="card-title">User Statistics
-                                        <%= users.length %>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="card-title">User Statistics
+                                            <%= users.length %>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="card-title">
+                                            <button class="btn btn-success btn-block btn-lg" data-toggle="modal" data-target="#newUser">
+												Create a user
+											</button>
+                                        </div>
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="newUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        Add User
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+                                                    </div>
+                                                    <form action="/register" class="form-control control-form form " method="post">
+                                                        <div class="modal-body">
+                                                            <input type="hidden" name="_token" value="">
+                                                            <li class="feed-item feed-item-secondary">
+                                                                <span class="text">
+																Nom
+																
+														<input class="form-control control form "  value="" type="text" name="name" id="name" placeholder="">
+															</span>
+                                                            </li>
+                                                            <li class="feed-item feed-item-success">
+                                                                <span class="text">Email
+																<input class="form-control control form " value="" type="text" name="mail" id="mail" placeholder="">
+																<br>
+																<input type="password" name="pass" id="pass" class="form control input-form input" required>
+															</span>
+                                                            </li>
+                                                            <li class="feed-item feed-item-info">
+                                                                <span class="text">Tel
+																<input class="form-control control form " value="" type="text" name="tel" id="tel" placeholder="">
+															</span>
+                                                            </li>
+                                                            <li class="feed-item feed-item-warning">
+                                                                <span class="text">Adresse
+																<input class="form-control control form " value="" type="text" name="address" id="address" placeholder="">
+															</span>
+                                                            </li>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="reset" class="btn btn-danger" data-dismiss="modal">Cancer</button>
+                                                            <button type="submit" class="btn btn-success">Save changes</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -549,7 +620,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="view-profile">
-                                                    <a href="#" class="btn btn-secondary btn-block">Edit Full Profile</a>
+                                                    <a href="#" class="btn btn-secondary btn-block">View Full Profile</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -614,14 +685,14 @@
                                                     </td>
                                                     <td><span class="col-green"><%= users[i]["type"] %></span></td>
                                                     <td>
-                                                        <a href="/users/edit/<%= users[i]['_id'] %>" class="btn btn-primary btn-lg btn-block waves-effect waves-float waves-green"><i class="now-ui-icons ui-1_settings-gear-63"></i></a>
+                                                        <a href="/users/edit/<%= users[i]['_id'] %>" class="btn btn-primary btn-lg btn-block waves-effect waves-float waves-green"><i class="fas fa-edit"></i></a>
                                                     </td>
                                                     <td>
                                                         <form action="/users/delete/<%= users[i]['_id'] %>" method="POST">
                                                             <input type="hidden" name="_token" value="<%= users[i]['_id'] %>">
                                                             <input type="hidden" name="_method" value="DELETE">
                                                             <button type="submit" class="btn btn-danger btn-lg btn-block waves-effect waves-float waves-red">
-                                                            <i class="now-ui-icons ui-1_simple-remove"></i>
+                                                            <i class="fas fa-trash"></i>
                                                         </button>
                                                         </form>
                                                     </td>
@@ -1066,6 +1137,163 @@
                                                             <li class="feed-item feed-item-warning">
                                                                 <span class="text">Duree  de la certification ( Ans ) 
 																<input class="form-control control form " value="<%= partners_campus[i]['duree'] %>" type="number" name="duree" id="duree" placeholder="">
+															</span>
+                                                            </li>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="reset" class="btn btn-danger" data-dismiss="modal">Cancer</button>
+                                                            <button type="submit" class="btn btn-success">Save changes</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <% } %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" id="programme">
+                        <div class="col-md-6">
+                            <div class="card full-height">
+                                <div class="card-header">
+                                    <div class="card-title">Gestion du contenu programmes par thême</div>
+                                </div>
+                                <div class="card-body">
+                                    <ol class="activity-feed">
+
+                                        <form action="/programmes/add" method="post">
+
+                                            <li class="feed-item feed-item-secondary">
+                                                <span class="text">
+                                                
+                                        <input class="form-control control form " type="text" name="title" id="title" placeholder="Thême du programmes">
+                                            </span>
+                                            </li>
+                                            <li class="feed-item feed-item-success">
+                                                <span class="text">
+                                                <input class="form-control control form " type="text" name="description" id="description" placeholder="Description du programmes">
+                                            </span>
+                                            </li>
+                                            <li class="feed-item feed-item-info">
+                                                <span class="text">
+                                                <input class="form-control control form " type="text" name="provider" id="provider" placeholder="Listes des Unités d'enseignements">
+                                            </span>
+                                            </li>
+                                            <li class="feed-item feed-item-warning">
+                                                <span class="text">
+                                                <input class="form-control control form " type="text" name="classe" id="classe" placeholder="Classe   du programmes ( Ex : 3eme MBA SPECIAL DATA ) ">
+                                            </span>
+                                            </li>
+                                            <li class="feed-item feed-item-danger">
+                                                <span class="text">
+                                                <label for="">Les Listes des cours du programmes</label>
+                                                <div class="col-md-10">
+                                                    <div class="form-check-inline">
+                                                        <label class="form-check-label">
+                                                            <input type="checkbox" class="form-check-input" value="">Option 1
+                                                        </label>
+                                                        </div>
+                                                        <div class="form-check-inline">
+                                                        <label class="form-check-label">
+                                                            <input type="checkbox" class="form-check-input" value="">Option 2
+                                                        </label>
+                                                        </div>
+                                                        <div class="form-check-inline">
+                                                        <label class="form-check-label">
+                                                            <input type="checkbox" class="form-check-input" value="">Option 3
+                                                        </label>
+                                                        </div> 
+                                                </div>
+                                            </span>
+                                            </li>
+                                            <button type="submit" class="btn btn-success btn-block" [disabled]="!form.form.valid">
+                                            Save
+                                        </button>
+                                        </form>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card full-height">
+                                <div class="card-header">
+                                    <div class="card-head-row">
+                                        <div class="card-title">Listes des programmes par thême
+                                            <%= programmes.length %>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <% for( var i = 0; i < programmes.length; i++){ %>
+                                        <div class="d-flex">
+                                            <div class="avatar avatar-online">
+                                                <span class="avatar-title rounded-circle border border-white bg-info"><%= i %></span>
+                                            </div>
+                                            <div class="flex-1 ml-3 pt-1">
+                                                <h6 class="text-uppercase fw-bold mb-1">
+                                                    <%= programmes[i]["title"] %><span class="text-warning pl-3"><%= programmes[i]["duree"] %> </span></h6>
+                                                <span class="text-muted"><%= programmes[i]["description"] %></span>
+                                                <br>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="row">
+                                            <br>
+                                            <div class="col-md-8">
+                                                <!-- Button trigger modal -->
+                                                <small>
+												<button type="button" class="btn btn btn-primary btn-block btn-toggle" data-toggle="modal" data-target="#exampleModal<%= programmes[i]['_id'] %>">
+													<small>Edit</small>
+                                                </button>
+                                                </small>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <!-- Button trigger modal -->
+                                                <small>
+												<form action="/programmes/delete/<%= programmes[i]['_id'] %>" method="POST">
+													<button type="submit" class="btn btn-danger btn-toggle btn-block " >
+														<small>Delete</small>
+                                                </button>
+                                                </form>
+                                                </small>
+                                            </div>
+                                        </div>
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="exampleModal<%= programmes[i]['_id'] %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        Edit certifications
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+                                                    </div>
+                                                    <form action="/programmes/edit/<%= programmes[i]['_id'] %>" class="form-control control-form form " method="post">
+                                                        <div class="modal-body">
+                                                            <input type="hidden" name="_id" value="<%= programmes[i]['_id'] %>">
+                                                            <li class="feed-item feed-item-secondary">
+                                                                <span class="text">
+																Thême du programmes
+																
+														<input class="form-control control form "  value="<%= programmes[i]['title'] %>" type="text" name="title" id="title" placeholder="">
+															</span>
+                                                            </li>
+                                                            <li class="feed-item feed-item-success">
+                                                                <span class="text">Description du programmes
+																<input class="form-control control form " value="<%= programmes[i]['description'] %>" type="text" name="description" id="description" placeholder="">
+															</span>
+                                                            </li>
+                                                            <li class="feed-item feed-item-info">
+                                                                <span class="text">Listes des Unités d'enseignements
+																<input class="form-control control form " value="<%= programmes[i]['provider'] %>" type="text" name="provider" id="provider" placeholder="">
+															</span>
+                                                            </li>
+                                                            <li class="feed-item feed-item-warning">
+                                                                <span class="text">Classe du programmes
+																<input class="form-control control form " value="<%= programmes[i]['classe'] %>" type="text" name="classe" id="classe" placeholder="">
 															</span>
                                                             </li>
                                                         </div>

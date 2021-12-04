@@ -14,6 +14,7 @@ var auth = [];
 var certificates = [];
 var partners = [];
 var partners_campus = [];
+var programmes = [];
 // # Initialise users and usertypes
 
 MongoClient.connect(url, function(err, db) {
@@ -60,6 +61,15 @@ MongoClient.connect(url, function(err, db) {
     });
 });
 
+MongoClient.connect(url, function(err, db) {
+    if (err) throw err;
+    var dbo = db.db("groupe6");
+    dbo.collection("programme").find({}).toArray(function(err, results) {
+        if (err) throw err;
+        programmes = results;
+        db.close();
+    });
+});
 //calling express
 var app = express();
 
@@ -112,6 +122,54 @@ app.post("/login", function(req, res) {
     }
 });
 
+app.get("/register", function(req, res) {
+    res.render('register');
+});
+
+app.post("/register", function(req, res) {
+    if (req.body) {
+        if (auth.length == 1) {
+            res.redirect('/login?status=done');
+        } else {
+            MongoClient.connect(url, function(err, db) {
+                if (err) throw err;
+                var dbo = db.db("groupe6");
+                var users_admin = [{
+                    "_id": new ObjectID(),
+                    "name": req.body.name,
+                    "pass": req.body.pass,
+                    "mail": req.body.mail,
+                    "tel": req.body.tel,
+                    "address": req.body.address,
+                    "type": "user",
+                    "status": "3",
+                    "roles": [
+                        "3",
+                        "4"
+                    ]
+                }];
+                dbo.collection("users").insertMany(users_admin, function(err, res) {
+                    if (err) throw err;
+                    console.log(res, "New user done ");
+                    db.close();
+                });
+                res.redirect('/login?status=register');
+            });
+        }
+    }
+});
+
+app.get("/logout", function(req, res) {
+    if (auth.length == 1) {
+        auth = [];
+        console.log("Logout Auth")
+        res.redirect('/login?status=logout');
+    } else {
+        res.redirect('/login?status=need')
+    }
+
+});
+
 app.get("/dashboard", function(req, res) {
     if (auth.length == 1) {
         res.render('dashboard/home', {
@@ -119,7 +177,8 @@ app.get("/dashboard", function(req, res) {
             users: users,
             certificates: certificates,
             partners: partners,
-            partners_campus: partners_campus
+            partners_campus: partners_campus,
+            programmes: programmes
         });
     } else {
         res.redirect('/login?status=need')
@@ -249,6 +308,67 @@ app.post("/partners/delete/:id", function(req, res) {
         });
     }
 });
+
+
+app.post("/programmes/add", function(req, res) {
+    if (req.body) {
+        var programmes = [{
+            "title": req.body.title,
+            "description": req.body.description,
+            "provider": req.body.provider,
+            "classe": req.body.classe,
+            "conditions": ""
+        }];
+        MongoClient.connect(url, function(err, db) {
+            if (err) throw err;
+            var dbo = db.db("groupe6");
+            dbo.collection("programme").insertMany(programmes, function(err, res) {
+                if (err) throw err;
+                console.log(res);
+                db.close();
+            });
+            res.redirect('/dashboard');
+        });
+    }
+});
+
+app.post("/programmes/edit/:id", function(req, res) {
+    if (req.body) {
+        MongoClient.connect(url, function(err, db) {
+            if (err) throw err;
+            var dbo = db.db("groupe6");
+            dbo.collection("programme").updateOne({ _id: new ObjectID(req.params.id) }, { $set: { 'title': req.body.title, 'description': req.body.description, 'provider': req.body.provider, 'classe': req.body.classe } }, { upsert: true }, function(err, res) {
+                if (err) throw err;
+                console.log("1 document update");
+                console.log(res);
+                db.close();
+            });
+            res.redirect('/dashboard?status=done&m=programmes update');
+        });
+    }
+});
+
+
+app.post("/programmes/delete/:id", function(req, res) {
+    if (req.body) {
+        MongoClient.connect(url, function(err, db) {
+            if (err) throw err;
+            var dbo = db.db("groupe6");
+
+            var myquery = { _id: req.params.id };
+            dbo.collection("programme").deleteOne(myquery, function(err, obj) {
+                if (err) throw err;
+                console.log("1 document deleted", obj);
+                db.close();
+            });
+
+            console.log(myquery);
+
+            res.redirect('/dashboard?status=done&m=programmes Delete');
+        });
+    }
+});
+
 
 app.post('/addtask', function(req, res) {
     if (req.body.newtask) {
