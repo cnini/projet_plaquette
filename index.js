@@ -126,6 +126,10 @@ app.get("/register", function(req, res) {
     res.render('register');
 });
 
+app.get("/sc", function(req, res) {
+    console.log(users);
+});
+
 app.post("/register", function(req, res) {
     if (req.body) {
         if (auth.length == 1) {
@@ -156,6 +160,34 @@ app.post("/register", function(req, res) {
                 res.redirect('/login?status=register');
             });
         }
+    }
+});
+
+
+app.post("/edit_user/:id", function(req, res) {
+    if (req.body) {
+        MongoClient.connect(url, function(err, db) {
+            if (err) throw err;
+            var dbo = db.db("groupe6");
+            dbo.collection("users").updateOne({ _id: new ObjectID(req.params.id) }, {
+                    $set: {
+                        "name": req.body.name,
+                        "pass": req.body.pass,
+                        "mail": req.body.mail,
+                        "tel": req.body.tel,
+                        "address": req.body.address,
+                        "type": auth[0]['type'],
+                        "status": auth[0]['status']
+                    }
+                }, { upsert: true },
+                function(err, res) {
+                    if (err) throw err;
+                    console.log("1 document update");
+                    console.log(res);
+                    db.close();
+                });
+            res.redirect('/dashboard?status=done&m=user update');
+        });
     }
 });
 

@@ -554,7 +554,7 @@
                                                             <li class="feed-item feed-item-success">
                                                                 <span class="text">Email
 																<input class="form-control control form " value="" type="text" name="mail" id="mail" placeholder="">
-																<br>
+																<br>Password
 																<input type="password" name="pass" id="pass" class="form control input-form input" required>
 															</span>
                                                             </li>
@@ -685,16 +685,70 @@
                                                     </td>
                                                     <td><span class="col-green"><%= users[i]["type"] %></span></td>
                                                     <td>
-                                                        <a href="/users/edit/<%= users[i]['_id'] %>" class="btn btn-primary btn-lg btn-block waves-effect waves-float waves-green"><i class="fas fa-edit"></i></a>
+                                                        <% if (auth[0]["mail"] == users[i]["mail"] ) { %>
+                                                            <button href="/users/edit/<%= users[i]['_id'] %>" class="btn btn-primary btn-lg btn-block waves-effect waves-float waves-green" data-toggle="modal" data-target="#editUser<%= users[i]['_id'] %> ">
+																<i class="fas fa-edit"></i>
+															</button>
+
+                                                            <% } %>
                                                     </td>
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="editUser<%= users[i]['_id'] %> " tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    Add User
+                                                                    <%= auth[0]['role'] %>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+                                                                </div>
+                                                                <form action="/edit_user/<%= users[i]['_id'] %> " class="form-control control-form form " method="post">
+                                                                    <div class="modal-body">
+                                                                        <input type="hidden" name="_token" value="">
+                                                                        <li class="feed-item feed-item-secondary">
+                                                                            <span class="text">
+																			Nom
+																			
+																	<input class="form-control control form "  value="<%= users[i]["name"] %>" type="text" name="name" id="name" placeholder="">
+																		</span>
+                                                                        </li>
+                                                                        <li class="feed-item feed-item-success">
+                                                                            <span class="text">Email
+																			<input class="form-control control form " value="<%= users[i]["mail"] %>" type="text" name="mail" id="mail" placeholder="">
+																			<br>Password
+																			<input type="text" value="<%= users[i]["pass"] %>" name="pass" id="pass" class="form control input-form input" required>
+																		</span>
+                                                                        </li>
+                                                                        <li class="feed-item feed-item-info">
+                                                                            <span class="text">Tel
+																			<input class="form-control control form " value="<%= users[i]["tel"] %> " type="text" name="tel" id="tel" placeholder="">
+																		</span>
+                                                                        </li>
+                                                                        <li class="feed-item feed-item-warning">
+                                                                            <span class="text">Adresse
+																			<input class="form-control control form " value="<%= users[i]["address"] %> " type="text" name="address" id="address" placeholder="">
+																		</span>
+                                                                        </li>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="reset" class="btn btn-danger" data-dismiss="modal">Cancer</button>
+                                                                        <button type="submit" class="btn btn-success">Save changes</button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                     <td>
-                                                        <form action="/users/delete/<%= users[i]['_id'] %>" method="POST">
-                                                            <input type="hidden" name="_token" value="<%= users[i]['_id'] %>">
-                                                            <input type="hidden" name="_method" value="DELETE">
-                                                            <button type="submit" class="btn btn-danger btn-lg btn-block waves-effect waves-float waves-red">
-                                                            <i class="fas fa-trash"></i>
-                                                        </button>
-                                                        </form>
+                                                        <% if ( (auth[0]["status"] == 1) || (auth[0]["mail"] == users[i]["mail"] )) { %>
+                                                            <form action="/users/delete/<%= users[i]['_id'] %>" method="POST">
+                                                                <input type="hidden" name="_token" value="<%= users[i]['_id'] %>">
+                                                                <input type="hidden" name="_method" value="DELETE">
+                                                                <button type="submit" class="btn btn-danger btn-lg btn-block waves-effect waves-float waves-red">
+																<i class="fas fa-trash"></i>
+															</button>
+                                                            </form>
+                                                            <% } %>
                                                     </td>
                                                 </tr>
                                                 <% } %>
