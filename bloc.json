@@ -1,0 +1,117 @@
+{
+  "premiere annee": {
+    "prerequis": {
+      "0": "Être titulaire d’un Bac général, avec au moins une des 4 spécialités suivantes : 1/mathématiques, 2/physique–chimie, 3/numérique et sciences informatiques ou 4/sciences de l’ingénieur",
+      "1": "Être titulaire d’un Bac technologique STMG, STI2D ou STL",
+      "2": "Être titulaire d’un Bac pro systèmes numériques (SN) ou Micro-informatique et réseaux (MRIM) ou une formation équivalente en France ou à l'international",
+      "3": "Exceptionnellement et après avis d’une commission réunissant la direction pédagogique de l’Éstiam et des intervenants issus du monde professionnel : Bac + expérience professionnelle significative en informatique"
+    },
+    "objectif": {
+      "0": "Administrer la mise en oeuvre du projet informatique",
+      "1": "Maintenir le systeme d'information en condition opérationnelle optimale",
+      "2": "Faire evoluer le systeme informatique"
+    },
+    "Les méthodes pédagogiques": {
+      "0": "Cours théoriques et exercices d'application en face à face pédagogique en présentiel ou en distanciel ou en hybride",
+      "1": "Cours à distance depuis l'international (Japon, USA, Inde, Brésil…)",
+      "2": "Projets en équipe supervisés par les formateurs",
+      "3": "Périodes professionnelles en entreprises (stages, alternance)",
+      "4": "Période d'immersion technologiques (hackathons, projets start-up...)"
+    },
+    "Les modalités d'évaluation": {
+      "0": "Travaux de groupe ou individuels en classe au fil de l’année",
+      "1": "Projet technique et soutenance orale",
+      "2": "Projet inter matières et soutenance orale",
+      "3": "Hackathons",
+      "4": "Stage, rapport de stage, évaluation en entreprise et soutenance orale",
+      "5": "Alternance, rapport d'alternance, évaluation en entreprise et soutenance orale"
+    }
+  },
+
+  "deuxieme annee": {
+    "prerequis": {
+      "0": "Être titulaire d’un Bac général, avec au moins une des 4 spécialités suivantes : 1/mathématiques, 2/physique–chimie, 3/numérique et sciences informatiques ou 4/sciences de l’ingénieur",
+      "1": "Être titulaire d’un Bac technologique STMG, STI2D ou STL",
+      "2": "Être titulaire d’un Bac pro systèmes numériques (SN) ou Micro-informatique et réseaux (MRIM) ou une formation équivalente en France ou à l'international",
+      "3": "Exceptionnellement et après avis d’une commission réunissant la direction pédagogique de l’Éstiam et des intervenants issus du monde professionnel : Bac + expérience professionnelle significative en informatique"
+    },
+    "objectif": {
+      "0": "Administrer la mise en oeuvre du projet informatique",
+      "1": "Maintenir le systeme d'information en condition opérationnelle optimale",
+      "2": "Faire evoluer le systeme informatique"
+    },
+    "Les méthodes pédagogiques": {
+      "0": "Cours théoriques et exercices d'application en face à face pédagogique en présentiel ou en distanciel ou en hybride",
+      "1": "Cours à distance depuis l'international (Japon, USA, Inde, Brésil…)",
+      "2": "Projets en équipe supervisés par les formateurs",
+      "3": "Périodes professionnelles en entreprises (stages, alternance)",
+      "4": "Période d'immersion technologiques (hackathons, projets start-up...)"
+    },
+    "Les modalités d'évaluation": {
+      "0": "Travaux de groupe ou individuels en classe au fil de l’année",
+      "1": "Projet technique et soutenance orale",
+      "2": "Projet inter matières et soutenance orale",
+      "3": "Hackathons",
+      "4": "Stage, rapport de stage, évaluation en entreprise et soutenance orale",
+      "5": "Alternance, rapport d'alternance, évaluation en entreprise et soutenance orale"
+    }
+  },
+
+  "troisieme annee": {
+    "prerequis": {
+      "0": "Être titulaire d’un Bac général, avec au moins une des 4 spécialités suivantes : 1/mathématiques, 2/physique–chimie, 3/numérique et sciences informatiques ou 4/sciences de l’ingénieur",
+      "1": "Être titulaire d’un Bac technologique STMG, STI2D ou STL",
+      "2": "Être titulaire d’un Bac pro systèmes numériques (SN) ou Micro-informatique et réseaux (MRIM) ou une formation équivalente en France ou à l'international",
+      "3": "Exceptionnellement et après avis d’une commission réunissant la direction pédagogique de l’Éstiam et des intervenants issus du monde professionnel : Bac + expérience professionnelle significative en informatique"
+    },
+    "objectif": {
+      "0": "Administrer la mise en oeuvre du projet informatique",
+      "1": "Maintenir le systeme d'information en condition opérationnelle optimale",
+      "2": "Faire evoluer le systeme informatique"
+    },
+    "Les méthodes pédagogiques": {
+      "0": "Cours théoriques et exercices d'application en face à face pédagogique en présentiel ou en distanciel ou en hybride",
+      "1": "Cours à distance depuis l'international (Japon, USA, Inde, Brésil…)",
+      "2": "Projets en équipe supervisés par les formateurs",
+      "3": "Périodes professionnelles en entreprises (stages, alternance)",
+      "4": "Période d'immersion technologiques (hackathons, projets start-up...)"
+    },
+    "Les modalités d'évaluation": {
+      "0": "Travaux de groupe ou individuels en classe au fil de l’année",
+      "1": "Projet technique et soutenance orale",
+      "2": "Projet inter matières et soutenance orale",
+      "3": "Hackathons",
+      "4": "Stage, rapport de stage, évaluation en entreprise et soutenance orale",
+      "5": "Alternance, rapport d'alternance, évaluation en entreprise et soutenance orale"
+    }
+  },
+
+  "quatrieme annee": {
+    "prerequis": {
+      "0": "Être titulaire d’un Bac général, avec au moins une des 4 spécialités suivantes : 1/mathématiques, 2/physique–chimie, 3/numérique et sciences informatiques ou 4/sciences de l’ingénieur",
+      "1": "Être titulaire d’un Bac technologique STMG, STI2D ou STL",
+      "2": "Être titulaire d’un Bac pro systèmes numériques (SN) ou Micro-informatique et réseaux (MRIM) ou une formation équivalente en France ou à l'international",
+      "3": "Exceptionnellement et après avis d’une commission réunissant la direction pédagogique de l’Éstiam et des intervenants issus du monde professionnel : Bac + expérience professionnelle significative en informatique"
+    },
+    "objectif": {
+      "0": "Administrer la mise en oeuvre du projet informatique",
+      "1": "Maintenir le systeme d'information en condition opérationnelle optimale",
+      "2": "Faire evoluer le systeme informatique"
+    },
+    "Les méthodes pédagogiques": {
+      "0": "Cours théoriques et exercices d'application en face à face pédagogique en présentiel ou en distanciel ou en hybride",
+      "1": "Cours à distance depuis l'international (Japon, USA, Inde, Brésil…)",
+      "2": "Projets en équipe supervisés par les formateurs",
+      "3": "Périodes professionnelles en entreprises (stages, alternance)",
+      "4": "Période d'immersion technologiques (hackathons, projets start-up...)"
+    },
+    "Les modalités d'évaluation": {
+      "0": "Travaux de groupe ou individuels en classe au fil de l’année",
+      "1": "Projet technique et soutenance orale",
+      "2": "Projet inter matières et soutenance orale",
+      "3": "Hackathons",
+      "4": "Stage, rapport de stage, évaluation en entreprise et soutenance orale",
+      "5": "Alternance, rapport d'alternance, évaluation en entreprise et soutenance orale"
+    }
+  }
+}
