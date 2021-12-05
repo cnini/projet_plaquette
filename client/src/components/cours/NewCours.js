@@ -11,7 +11,8 @@ export default class NewCours extends Component {
         this.onChangeCoursSemestre = this.onChangeCoursSemestre.bind(this)
         this.onChangeCoursNom = this.onChangeCoursNom.bind(this)
         this.onChangeTheme = this.onChangeTheme.bind(this)
-        this.onChangeCoursCredits = this.onChangeCoursCredits.bind(this)
+        this.onChangeCoursCreditsCcsn = this.onChangeCoursCreditsCcsn.bind(this)
+        this.onChangeCoursCreditsDad = this.onChangeCoursCreditsDad.bind(this)
         this.onChangeCoursDuree = this.onChangeCoursDuree.bind(this)
 
         this.onSubmit = this.onSubmit.bind(this)
@@ -20,7 +21,8 @@ export default class NewCours extends Component {
             annee: "0",
             semestre: 0,
             nom: "",
-            credits: 0,
+            credits_ccsn: 0,
+            credits_dad: 0,
             duree: 0,
             theme: "",
             nbAnnees: ["1","2","3","4","5"],
@@ -47,9 +49,15 @@ export default class NewCours extends Component {
         })
     }
 
-    onChangeCoursCredits(e) {
+    onChangeCoursCreditsCcsn(e) {
         this.setState({
-            credits: e.target.value
+            credits_ccsn: e.target.value
+        })
+    }
+
+    onChangeCoursCreditsDad(e) {
+        this.setState({
+            credits_dad: e.target.value
         })
     }
 
@@ -78,9 +86,10 @@ export default class NewCours extends Component {
             annee: this.state.annee,
             semestre: this.state.semestre,
             nom: this.state.nom,
-            credits: this.state.credits,
             duree: this.state.duree,
-            theme: this.state.theme
+            theme: this.state.theme,
+            credits_ccsn: this.state.credits_ccsn,
+            credits_dad: this.state.credits_dad,
         }
 
         axios
@@ -91,9 +100,10 @@ export default class NewCours extends Component {
             annee: "0",
             semestre: 0,
             nom: "",
-            credits: 0,
             duree: 0,
-            theme: ""
+            theme: "",
+            credits_ccsn: 0,
+            credits_dad: 0,
         })
 
         window.location.pathname = "/dashboard"
@@ -147,13 +157,23 @@ export default class NewCours extends Component {
                         />
                     </div>
                     <div>
-                        <label>Crédits ECTS : </label>
+                        <label>Crédits ECTS CCSN: </label>
                         <input
                             type="number"
                             name="credits"
                             min="0"
-                            value={this.state.credits}
-                            onChange={this.onChangeCoursCredits}
+                            value={this.state.credits_ccsn}
+                            onChange={this.onChangeCoursCreditsCcsn}
+                        />
+                    </div>
+                    <div>
+                        <label>Crédits ECTS DAD: </label>
+                        <input
+                            type="number"
+                            name="credits"
+                            min="0"
+                            value={this.state.credits_dad}
+                            onChange={this.onChangeCoursCreditsDad}
                         />
                     </div>
                     <div>

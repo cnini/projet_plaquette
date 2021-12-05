@@ -33,7 +33,7 @@ export default class CoursCard extends Component {
             <div className="card">
                 <div className="card_annee">ÉSTIAM {this.props.cours.annee} (S{this.props.cours.semestre})</div>
                 <h4>{this.props.cours.nom}</h4>
-                <p>Thème {this.state.theme}, Crédits ECTS : {this.props.cours.credits}, Durée : {this.props.cours.duree} h
+                <p>Thème {this.state.theme}, Crédits ECTS CCSN : {this.props.cours.credits_ccsn}, Crédits ECTS DAD : {this.props.cours.credits_dad}, Durée : {this.props.cours.duree} h
                 </p>
                 {this.displayActions()}
             </div>

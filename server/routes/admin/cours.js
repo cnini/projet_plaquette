@@ -38,10 +38,11 @@ adminRoutes.route('/admin/cours/add').post( (req,res) => {
     let newCours = {
         nom: req.body.nom,
         annee: req.body.annee,
-        credits: req.body.credits,
         semestre: req.body.semestre,
         duree: req.body.duree,
-        theme: req.body.theme
+        theme: req.body.theme,
+        credits_ccsn: req.body.credits_ccsn,
+        credits_dad: req.body.credits_dad,
     }
 
     db_cnx.collection('cours').insertOne(newCours, (err,response) => {
@@ -61,10 +62,11 @@ adminRoutes.route('/admin/cours/u/cours/:id').put( (req,res) => {
         $set: {
             nom: req.body.nom,
             annee: req.body.annee,
-            credits: req.body.credits,
             semestre: req.body.semestre,
             duree: req.body.duree,
-            theme: req.body.theme
+            theme: req.body.theme,
+            credits_ccsn: req.body.credits_ccsn,
+            credits_dad: req.body.credits_dad,
         }
     }
 
