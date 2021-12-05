@@ -19,8 +19,8 @@ adminRoutes.route('/admin/cours').get( (req,res) => {
         })
 })
 
-// Les informations d'un thème
-adminRoutes.route('/admin/cours/:id').get( (req,res) => {
+// Les informations d'un cours
+adminRoutes.route('/admin/cours/r/cours/:id').get( (req,res) => {
     let db_cnx = dbo.getDb()
     let currentCours = { _id: ObjectId(req.params.id) }
     
@@ -31,17 +31,17 @@ adminRoutes.route('/admin/cours/:id').get( (req,res) => {
     })
 })
 
-// Ajouter un thème
+// Ajouter un cours
 adminRoutes.route('/admin/cours/add').post( (req,res) => {
     let db_cnx = dbo.getDb()
 
     let newCours = {
-        cours_code: req.body.cours_code,
-        cours_old_code: req.body.cours_old_code,
-        cours_nom: req.body.cours_nom,
-        cours_credits: req.body.cours_credits,
-        cours_semestre: req.body.cours_semestre,
-        cours_duree: req.body.cours_duree
+        nom: req.body.nom,
+        annee: req.body.annee,
+        credits: req.body.credits,
+        semestre: req.body.semestre,
+        duree: req.body.duree,
+        theme: req.body.theme
     }
 
     db_cnx.collection('cours').insertOne(newCours, (err,response) => {
@@ -52,19 +52,19 @@ adminRoutes.route('/admin/cours/add').post( (req,res) => {
 
 })
 
-// Modifier un thème
-adminRoutes.route('/admin/cours/update/:id').post( (req,res) => {
+// Modifier un cours
+adminRoutes.route('/admin/cours/u/cours/:id').put( (req,res) => {
     let db_cnx = dbo.getDb()
     let currentCours = { _id: ObjectId(req.params.id) }
 
     let updatedCours = {
         $set: {
-            cours_code: req.body.cours_code,
-            cours_old_code: req.body.cours_old_code,
-            cours_nom: req.body.cours_nom,
-            cours_credits: req.body.cours_credits,
-            cours_semestre: req.body.cours_semestre,
-            cours_duree: req.body.cours_duree
+            nom: req.body.nom,
+            annee: req.body.annee,
+            credits: req.body.credits,
+            semestre: req.body.semestre,
+            duree: req.body.duree,
+            theme: req.body.theme
         }
     }
 
@@ -77,7 +77,7 @@ adminRoutes.route('/admin/cours/update/:id').post( (req,res) => {
 })
 
 // Supprimer un cours
-adminRoutes.route('/admin/cours/delete/:id').delete( (req,res) => {
+adminRoutes.route('/admin/cours/d/cours/:id').delete( (req,res) => {
     let db_cnx = dbo.getDb()
     let currentCours = { _id: ObjectId(req.params.id) }
 

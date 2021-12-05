@@ -6,37 +6,43 @@ export default class NewTheme extends Component {
         super(props)
 
         this.onChangeThemeNom = this.onChangeThemeNom.bind(this)
+
         this.onSubmit = this.onSubmit.bind(this)
 
         this.state = {
-            theme_nom: ""
+            nom: ""
         }
     }
 
+    // Méthode pour le this.state
     onChangeThemeNom(e) {
         this.setState({
-            theme_nom: e.target.value
+            nom: e.target.value
         })
     }
 
+    // Méthode d'ajout à la validation du formulaire
     onSubmit(e) {
         e.preventDefault()
 
-        console.log(this.state)
-
         const newTheme = {
-            theme_nom: this.state.theme_nom
+            nom: this.state.nom,
+            ues: this.state.ues
         }
 
         axios
-            .post("http://localhost:8080/admin/theme/add", newTheme)
+            .post("http://localhost:8080/admin/themes/add", newTheme)
             .then( (res) => console.log(res.data) )
         
         this.setState({
-            theme_nom: "",
+            nom: "",
+            ues: []
         })
+
+        window.location.pathname = "/dashboard"
     }
 
+    // Rendu HTML
     render() {
         return(
             <div>
@@ -46,15 +52,15 @@ export default class NewTheme extends Component {
                         <label>Nom du thème: </label>
                         <input
                             type="text"
-                            name="theme_nom"
-                            value={this.state.theme_nom}
+                            name="nom"
+                            value={this.state.nom}
                             onChange={this.onChangeThemeNom}
                         />
                     </div>
                     <div>
                         <input
                             type="submit"
-                            value="Créer le thème"
+                            value="Créer"
                         />
                     </div>
                 </form>

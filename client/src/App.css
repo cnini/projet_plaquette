@@ -1,0 +1,104 @@
+#root {
+    padding-bottom: 3rem;
+}
+
+body {
+    padding: 0;
+    color: #004080;
+}
+
+h1 {
+    margin-bottom: -5px;
+}
+
+.home_section {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.dashboard_section{
+    display: flex;
+    margin-left: 2rem;
+}
+
+/* Formulaires d'ajout */
+.dashboard_section > div:first-child {
+    width: 500px;
+    margin-right: 5rem;
+}
+
+/* Cards */
+.dashboard_section > div:last-child {
+    width: 100%;
+    padding: 0 1rem;
+}
+
+.home_cards {
+    height: 100%;
+    padding: 1rem;
+    background-color: #ddd;
+}
+
+.dashboard_cards, .dashboard_themes {
+    max-height: 300px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    padding: 1rem;
+    background-color: #ddd;
+}
+
+.dashboard_themes {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.card, .theme {
+    margin-bottom: 1rem;
+    margin-left: 8px;
+    margin-right: 8px;
+    padding: 1rem;
+    color: #004080;
+    background-color: #fff;
+}
+
+.theme {
+    width: 20%;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+}
+
+.card_annee {
+    position: relative;
+    top: -1rem;
+    left: -1rem;
+    width: 12%;
+    padding: 5px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #0099E6;
+}
+
+.card h4 {
+    margin: -8px 0;
+}
+
+.theme > div {
+    width: 20%;
+}
+
+.card > div:last-child a, .theme > div a {
+    width: auto;
+    height: 20px;
+    padding: 8px 1rem;
+    text-align: center;
+    background-color: #004080;
+    text-decoration: none;
+    color: #FFEE00;
+}
+
+.card > div:last-child a:first-child, .theme > div a:first-child {
+    margin-right: 1rem;
+}
+

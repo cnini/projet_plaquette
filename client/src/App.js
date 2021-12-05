@@ -1,37 +1,25 @@
-import React from 'react'
+import React, { Component } from 'react'
 
 import { Routes,Route } from 'react-router-dom'
 
-// UEs
-import ListUe from './components/ue/list_ue'
-import NewUe from './components/ue/new_ue'
+import Home from './components/accueil/Home'
+import Dashboard from './components/accueil/Dashboard'
+import EditCours from './components/cours/EditCours'
+import EditTheme from './components/theme/EditTheme'
+import './App.css'
 
-// Thèmes / Blocs
-import ListTheme from './components/theme/list_theme'
-import NewTheme from './components/theme/new_theme'
-
-// Cours
-import ListCours from './components/cours/list_cours'
-import NewCours from './components/cours/new_cours'
-
-const App = () => {
-    return(
-        <div>
-            <Routes>
-                {/* UEs */}
-                <Route exact path="/admin/ue/" element={<ListUe />} />
-                <Route path="/admin/ue/add" element={<NewUe />} />
-
-                {/* Thèmes / Blocs */}
-                <Route exact path="/admin/theme/" element={<ListTheme />} />
-                <Route path="/admin/theme/add" element={<NewTheme />} />
-
-                {/* Cours */}
-                <Route exact path="/admin/cours/" element={<ListCours />} />
-                <Route path="/admin/cours/add" element={<NewCours />} />
-            </Routes>
-        </div>
-    )
+export default class App extends Component {
+    render() {
+        return(
+            <div>
+                <Routes>
+                    <Route exact path="/" element={<Home/>} />
+                    <Route path="/dashboard" element={<Dashboard/>} />
+                    <Route path="/admin/cours/r/cours/:id" element={<EditCours/>} />
+                    <Route path="/admin/themes/r/theme/:id" element={<EditTheme/>} />
+                </Routes>
+            </div>
+        )
+    }
+    
 }
-
-export default App

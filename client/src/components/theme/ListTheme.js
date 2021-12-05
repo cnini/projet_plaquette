@@ -1,16 +1,9 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 
-const Theme = (props) => (
-    <tr>
-        <td>{props.theme.theme_nom}</td>
-        <td>
-            <ul>
-                <li><a href='/admin/theme' onClick={() => props.deleteTheme(props.theme._id)}>Supprimer</a></li>
-            </ul>
-        </td>
-    </tr>
-)
+import ThemeCard from './ThemeCard'
+import NewTheme from './NewTheme'
+
 
 export default class ThemeList extends Component {
     constructor(props) {
@@ -23,7 +16,7 @@ export default class ThemeList extends Component {
 
     componentDidMount() {
         axios
-            .get('http://localhost:8080/admin/theme')
+            .get('http://localhost:8080/admin/themes')
             .then( (response) => {
                 this.setState({ themes: response.data })
             })
@@ -32,7 +25,7 @@ export default class ThemeList extends Component {
 
     deleteTheme(id) {
         axios
-            .delete('http://localhost:8080/admin/theme/delete/' + id)
+            .delete('http://localhost:8080/admin/themes/d/theme/' + id)
             .then( (response) => console.log(response.data) )
 
         this.setState({
@@ -40,10 +33,10 @@ export default class ThemeList extends Component {
         })
     }
 
-    themeList() {
+    themeCards() {
         return this.state.themes.map( (theme) => {
             return(
-                <Theme
+                <ThemeCard
                     theme={theme}
                     deleteTheme={this.deleteTheme}
                     key={theme._id}
@@ -55,16 +48,16 @@ export default class ThemeList extends Component {
     render() {
         return(
             <div>
-                <h3>Liste des thèmes</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Nom du thème</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>{this.themeList()}</tbody>
-                </table>
+                <h1>Thèmes</h1>
+                <div className="dashboard_section">
+                    <div>
+                        <NewTheme/>
+                    </div>
+                    <div>
+                        <h3>Liste des thèmes</h3>
+                        <div className="dashboard_themes">{this.themeCards()}</div>
+                    </div>
+                </div>
             </div>
         )
     }
