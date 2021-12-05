@@ -4,7 +4,7 @@ import axios from 'axios'
 import CoursCard from './CoursCard'
 import NewCours from './NewCours'
 
-export default class CoursList extends Component {
+export default class ListCours extends Component {
     constructor(props) {
         super(props)
 

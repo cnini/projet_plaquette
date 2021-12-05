@@ -5,7 +5,7 @@ import ThemeCard from './ThemeCard'
 import NewTheme from './NewTheme'
 
 
-export default class ThemeList extends Component {
+export default class ListTheme extends Component {
     constructor(props) {
         super(props)
         

@@ -66,7 +66,7 @@ adminRoutes.route('/admin/cours/u/cours/:id').put( (req,res) => {
             duree: req.body.duree,
             theme: req.body.theme,
             credits_ccsn: req.body.credits_ccsn,
-            credits_dad: req.body.credits_dad,
+            credits_dad: req.body.credits_dad
         }
     }
 

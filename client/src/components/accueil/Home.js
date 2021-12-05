@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 
 import CoursCard from '../cours/CoursCard'
+import CompetenceCard from '../competence/CompetenceCard'
 
 export default class Home extends Component {
     constructor(props) {
@@ -14,8 +15,10 @@ export default class Home extends Component {
             annee: "",
             theme: "",
             cours: [],
+            competences: [],
             getCours: [],
             getTheme: [],
+            getCompetence: [],
             nbAnnees: ["1","2","3","4","5"],
             spes: ["Data & Application Design", "Cloud, Systems, Networks & Cyber security"]
         }
@@ -32,20 +35,27 @@ export default class Home extends Component {
             .then((res) => this.setState({ getTheme: res.data }))
             .catch((error) => console.log(error) )
 
+        axios
+            .get('http://localhost:8080/admin/competences')
+            .then((res) => this.setState({ getCompetence: res.data }))
+            .catch((error) => console.log(error) )
+
     }
 
     onChangeCoursAnnee(nb) {
         this.setState({
             annee: nb,
             theme: "",
-            cours: this.state.getCours.filter((c) => c.annee === nb)
+            cours: this.state.getCours.filter((c) => c.annee === nb),
+            competences: this.state.getCompetence.filter((c) => c.annee === nb)
         })
     }
 
     onChangeTheme(id) {
         this.setState({
             theme: id,
-            cours: this.state.getCours.filter((c) => c.theme === id && c.annee === this.state.annee)
+            cours: this.state.getCours.filter((c) => c.theme === id && c.annee === this.state.annee),
+            competences: this.state.getCompetence.filter((c) => c.theme === id && c.annee === this.state.annee)
         })
     }
 
@@ -83,12 +93,24 @@ export default class Home extends Component {
         })
     }
 
+    competencesCard() {
+        return this.state.competences.map((competence) => {
+            return(
+                <CompetenceCard
+                    competence={competence}
+                    deleteCompetence={null}
+                    key={competence._id}
+                />
+            )
+        })
+    }
+
     coursCards() {
         return this.state.cours.map((cours) => {
             return(
                 <CoursCard
                     cours={cours}
-                    deleteCours={this.deleteCours}
+                    deleteCours={null}
                     key={cours._id}
                 />
             )
@@ -109,6 +131,8 @@ export default class Home extends Component {
                     </div>
                     </div>
                 <div>
+                    <h2>Liste des compétences</h2>
+                    <div className="home_cards">{this.competencesCard()}</div>
                     <h2>Liste des cours</h2>
                     <div className="home_cards">{this.coursCards()}</div>
                 </div>
